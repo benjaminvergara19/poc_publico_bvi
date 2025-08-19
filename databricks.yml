@@ -4,7 +4,12 @@ include:
   - "resources/*.yml"
 targets:
   development:
+    mode: development
     default: true
-    workspace: {}
+    workspace:
+      host: https://adb-1193445751689943.3.azuredatabricks.net
   production:
-    workspace: {}
+    mode: production
+    workspace:
+      host: https://adb-1193445751689943.3.azuredatabricks.net
+      root_path: /Shared/prod-bundles/${bundle.name}
