@@ -1,7 +1,7 @@
 bundle:
   name: Poc
 include:
-  - "resources/*.yml"
+  - "resources/**/*.yml"
 targets:
   dev:
     mode: development
