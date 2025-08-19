@@ -1,0 +1,15 @@
+resources:
+  jobs:
+    uc_banner_bronze:
+      name: "UC Banner Bronze Processing (bundle)"
+      tags:
+        owner_user: "benjamin_vergara"
+        layer: "bronze"
+      access_control_list:
+        - user_name: "benjamin.vergara@uc.cl"
+          permission_level: "IS_OWNER"
+      tasks:
+        - task_key: bronze_uc_banner_task
+          existing_cluster_id: "0604-154954-8pbp3p4r"
+          notebook_task:
+            notebook_path: src/bronze/ORACLE/UC_BANNER.PERS.ipynb

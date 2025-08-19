@@ -1,0 +1,16 @@
+resources:
+  jobs:
+    poc_feature_poc:
+      name: "POC Feature POC (bundle)"
+      tags:
+        owner_user: "benjamin_vergara"
+        layer: "gold"
+        feature: "poc"
+      access_control_list:
+        - user_name: "benjamin.vergara@uc.cl"
+          permission_level: "IS_OWNER"
+      tasks:
+        - task_key: feature_poc_task
+          existing_cluster_id: "0604-154954-8pbp3p4r"
+          notebook_task:
+            notebook_path: src/gold/feature_poc/notebook.py

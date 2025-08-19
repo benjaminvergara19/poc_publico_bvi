@@ -1,0 +1,10 @@
+bundle:
+  name: Poc
+include:
+  - "resources/*.yml"
+targets:
+  development:
+    default: true
+    workspace: {}
+  production:
+    workspace: {}

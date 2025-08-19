@@ -1,0 +1,1 @@
+Directorio resources - contiene configuraciones de jobs por capa (bronze/silver/gold)

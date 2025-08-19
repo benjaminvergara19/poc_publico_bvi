@@ -1,0 +1,1 @@
+Bronze Layer - Datos en crudo extraídos de sistemas fuente
