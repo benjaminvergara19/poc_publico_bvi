@@ -6,9 +6,6 @@ resources:
         owner_user: "benjamin_vergara"
         layer: "gold"
         project: "proyecto_poc"
-      access_control_list:
-        - user_name: "benjamin.vergara@uc.cl"
-          permission_level: "IS_OWNER"
       tasks:
         - task_key: gold_proyecto_poc_task
           existing_cluster_id: "0604-154954-8pbp3p4r"
