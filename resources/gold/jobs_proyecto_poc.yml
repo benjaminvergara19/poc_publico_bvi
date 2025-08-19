@@ -10,4 +10,4 @@ resources:
         - task_key: gold_proyecto_poc_task
           existing_cluster_id: "0604-154954-8pbp3p4r"
           notebook_task:
-            notebook_path: ./src/gold/feature_poc/notebook.py
+            notebook_path: ../../src/gold/feature_poc/notebook.py

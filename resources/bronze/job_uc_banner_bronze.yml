@@ -9,4 +9,4 @@ resources:
         - task_key: bronze_uc_banner_task
           existing_cluster_id: "0604-154954-8pbp3p4r"
           notebook_task:
-            notebook_path: ./src/bronze/ORACLE/UC_BANNER.PERS.ipynb
+            notebook_path: ../../src/bronze/ORACLE/UC_BANNER.PERS.ipynb
