@@ -22,13 +22,14 @@ jobs:
         id: env
         run: |
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            echo "target_env=${{ github.event.inputs.environment }}" >> $GITHUB_OUTPUT
+            target_env=$([ "${{ github.event.inputs.environment }}" = "production" ] && echo "prod" || echo "dev")
+            echo "target_env=$target_env" >> $GITHUB_OUTPUT
             echo "event_type=deploy_$([ "${{ github.event.inputs.environment }}" = "production" ] && echo "produccion" || echo "desarrollo")" >> $GITHUB_OUTPUT
           elif [ "${{ github.ref }}" = "refs/heads/main" ]; then
-            echo "target_env=production" >> $GITHUB_OUTPUT
+            echo "target_env=prod" >> $GITHUB_OUTPUT
             echo "event_type=deploy_produccion" >> $GITHUB_OUTPUT
           else
-            echo "target_env=development" >> $GITHUB_OUTPUT
+            echo "target_env=dev" >> $GITHUB_OUTPUT
             echo "event_type=deploy_desarrollo" >> $GITHUB_OUTPUT
           fi
           
