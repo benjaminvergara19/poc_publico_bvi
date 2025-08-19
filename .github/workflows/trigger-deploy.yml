@@ -1,0 +1,55 @@
+name: Trigger Deploy to Databricks
+
+on:
+  push:
+    branches: [main, dev]
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Target environment'
+        required: true
+        default: 'development'
+        type: choice
+        options:
+        - development
+        - production
+
+jobs:
+  trigger-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Determine environment
+        id: env
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "target_env=${{ github.event.inputs.environment }}" >> $GITHUB_OUTPUT
+            echo "event_type=deploy_$([ "${{ github.event.inputs.environment }}" = "production" ] && echo "produccion" || echo "desarrollo")" >> $GITHUB_OUTPUT
+          elif [ "${{ github.ref }}" = "refs/heads/main" ]; then
+            echo "target_env=production" >> $GITHUB_OUTPUT
+            echo "event_type=deploy_produccion" >> $GITHUB_OUTPUT
+          else
+            echo "target_env=development" >> $GITHUB_OUTPUT
+            echo "event_type=deploy_desarrollo" >> $GITHUB_OUTPUT
+          fi
+          
+      - name: Trigger deployment
+        run: |
+          curl -X POST \
+            -H "Accept: application/vnd.github.v3+json" \
+            -H "Authorization: token ${{ secrets.REPO_DISPATCH_TOKEN }}" \
+            https://api.github.com/repos/benjaminvergara19/poc_sensible_bvi/dispatches \
+            -d '{
+              "event_type": "${{ steps.env.outputs.event_type }}",
+              "client_payload": {
+                "repo_owner": "benjaminvergara19",
+                "repo_name": "poc_publico_bvi",
+                "target_env": "${{ steps.env.outputs.target_env }}"
+              }
+            }'
+            
+      - name: Deployment triggered
+        run: |
+          echo "🚀 Deployment triggered!"
+          echo "Environment: ${{ steps.env.outputs.target_env }}"
+          echo "Event type: ${{ steps.env.outputs.event_type }}"
+          echo "Check deployment status at: https://github.com/benjaminvergara19/poc_sensible_bvi/actions"
